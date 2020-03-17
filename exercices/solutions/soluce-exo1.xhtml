@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Un fichier XHTML</title>
+        <!-- Penser à fermer les balises vides (ne contenant que des attributs). -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+    <body>
+        <!-- Faire attention, XML est case-sensitive. Par convention, les éléments HTML sont en minuscules. 
+            Plus généralement, penser que la balise ouvrante et fermante doivent être identique "case-sensitively". -->
+        <div>
+            <br/>
+            <!-- Tout les attributs doivent avoir une valeur entre '' ou "", même si le modèle HTML n'en attend pas. Par convention on met le nom de l'attribut comme valeur, ou éventuellement 'true' (la valeur mise ne change rien). -->            
+            <input type="checkbox" name="option1" value="Milk"/>Milk<br/>
+            <input type="checkbox" name="option2" value="Butter" checked="checked"/>Butter<br/>
+            <input type="checkbox" name="option3" value="Cheese"/>Cheese<br/>
+            <br/>
+        </div>
+    </body>
+</html>

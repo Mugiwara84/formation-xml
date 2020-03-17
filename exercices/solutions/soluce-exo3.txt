@@ -1,0 +1,18 @@
+1)
+/CDlist/CD/performance/composition
+ou
+//composition
+
+2)
+//performance[soloist]/composition
+ou
+//composition[following-sibling::soloist]
+
+3)
+//performance[not(soloist) and count(orchestra)=1]
+
+4)
+//CD[publisher='Deutsche Grammophon']/performance[orchestra='London Symphony Orchestra']/soloist
+
+5)
+//CD[.//orchestra='London Symphony Orchestra']

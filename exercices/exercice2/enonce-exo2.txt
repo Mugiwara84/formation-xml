@@ -1,0 +1,3 @@
+Modifier livre.xml pour qu'il soit valide.
+
+Corriger le schéma personne.xsd pour qu'il valide personne.xml

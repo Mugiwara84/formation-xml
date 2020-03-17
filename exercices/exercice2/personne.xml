@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<personne xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <nom>Dupond</nom>
+    <prenom>Jean</prenom>
+    <dateNaissance>1980-07-02</dateNaissance>
+    <ville>Compiègne</ville>
+    <sexe>Homme</sexe>
+    <enfants>
+        <nom_complet>Dupond Christophe</nom_complet>
+        <nom_complet>Dupond Emma</nom_complet>
+    </enfants>
+</personne>

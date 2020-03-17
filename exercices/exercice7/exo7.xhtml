@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Ajout d'index aux actes d'Othello</title>        
+    </head>    
+    <body>        
+        <div>
+            <p>On a un fichier source qui est la pièce Othello en XML. Elle est <a href="../resources/othello.xml" target="_blank">là</a> (resources/othello.xml)</p>            
+            <p>On veut ajouter à chaque élément &lt;ACT&gt;, un attribut 'index'.</p>
+            <p>Et on veut que la valeur de l'attribut soit {n-act-courant}/{total-act}</p>
+            <p>En gros on doit recopier tout le texte et transformer les éléments &lt;ACT&gt; en quelque chose comme ça :</p>
+            <p><![CDATA[<ACT index=1/5>...</ACT>]]></p>
+            <p><![CDATA[<ACT index="2/5">...</ACT>]]></p>
+            <p>...</p>            
+        </div>                
+    </body>
+</html>

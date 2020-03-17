@@ -1,0 +1,20 @@
+1)
+//award[position()=5]
+
+2)
+//award[position()=6]/author
+
+3)
+//award[year='2000']/title
+
+4)
+//award[title='Possession']/author/text()
+
+5)
+//award[author='J M Coetzee']/title
+
+6)
+//award[year > 1994]/title/text()
+
+7)
+count(//award)

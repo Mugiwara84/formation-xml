@@ -1,0 +1,6 @@
+Trouvez les expressions XPath qui retournent les informations suivantes :
+Question 1: toutes les compositions
+Question 2: toutes les compositions ayant un "soloist"
+Question 3: toutes les performances avec un seul "orchestra" mais pas de "soloist"
+Question 4: tous les soloists ayant joué avec le London Symphony Orchestra sur un CD publié par Deutsche Grammophon
+Question 5: tous les CDs comportant des performances du London Symphony Orchestra

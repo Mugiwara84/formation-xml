@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<livre xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="livre.xsd" isbn="978-2-7177-2113-4">
+    <titre>XSD pour les nuls</titre>
+    <auteur idAuteur="1">
+        <nom>Martin</nom>
+        <prenom>Martin</prenom>
+    </auteur>
+    <auteur idAuteur="2">
+        <nom>Dupond</nom>
+        <prenom>Jean</prenom>
+    </auteur>
+    <auteur idAuteur="3">
+        <nom>Dupont</nom>
+        <prenom>Fred</prenom>
+    </auteur>
+    <auteur idAuteur="4">
+        <nom>Paul</nom>
+        <prenom>Machin</prenom>
+    </auteur>
+    <presentation>Ce livre est une introduction au schéma XSD</presentation>
+</livre>

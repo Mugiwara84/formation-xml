@@ -1,0 +1,8 @@
+Trouvez les expressions XPath qui retournent les informations suivantes :
+Question 1: le cinquième livre dans la liste
+Question 2: l'auteur du sixième livre dans la liste
+Question 3: le titre du livre qui a gagné en 2000
+Question 4: le nom de l'auteur du livre intitulé "Possession"
+Question 5: le titre des livres dont "J M Coetzee" est l'auteur
+Question 6: le nom de tous les auteurs qui ont obtenu un prix depuis 1995
+Question 7: le nombre total de prix décernés
