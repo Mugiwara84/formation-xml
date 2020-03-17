@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta><meta charset="utf-8"></meta><meta name="apple-mobile-web-app-capable" content="yes"></meta><link href="syntaxhighlighter/styles/shCore.css" rel="stylesheet" type="text/css"></link><link href="syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" type="text/css"></link><link href="css/impress-semDev.css" rel="stylesheet"></link><link rel="shortcut icon" href="favicon.png"></link><link rel="apple-touch-icon" href="apple-touch-icon.png"></link><title>Eléments XSLT</title></head><body><table border="0" title="Eléments XSLT"><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-analyze-string">xsl:analyze-string</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_apply-imports.asp">xsl:apply-imports</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_apply-templates.asp">xsl:apply-templates</a></td><td><pre class="brush : xml;">&lt;xsl:apply-templates select="*"/&gt;
+
+&lt;!--Mais cette syntaxe est équivalente--&gt;
+&lt;xsl:apply-templates/&gt;</pre></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_attribute.asp">xsl:attribute</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_call-template.asp">xsl:call-template</a></td><td><pre class="brush: xml;">&lt;xsl:call-template name="nomDuTemplate"/&gt;</pre></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-character-map">xsl:character-map</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_choose.asp">xsl:choose</a></td><td><pre class="brush: xml;">&lt;xsl:choose&gt;
+  &lt;xsl:when test="A"&gt;
+    ...
+  &lt;/xsl:when&gt;
+  &lt;xsl:when test="B"&gt;
+    ...
+  &lt;/xsl:when&gt;
+  &lt;!--La condition 'à l'exclusion de toutes les autres'--&gt;
+  &lt;xsl:otherwise/&gt;
+&lt;/xsl:choose&gt;</pre></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_comment.asp">xsl:comment</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_copy.asp">xsl:copy</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_copy-of.asp">xsl:copy-of</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_decimal-format.asp">xsl:decimal-format</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-document">xsl:document</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_element.asp">xsl:element</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_for-each.asp">xsl:for-each</a></td><td><pre class="brush: xml;">&lt;xsl:for-each select="//P"&gt;
+&lt;!--Ce que l'on fait à chaque itération--&gt;
+    &lt;xsl:value-of select="text()"/&gt;
+&lt;/xsl:for-each&gt;</pre></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-for-each-group">xsl:for-each-group</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-function">xsl:function</a></td><td><pre class="brush: xml;">&lt;!--La déclaration doit se faire "au début" de la feuille XSLT 
+et elle doit s'appuyer sur un namespace spécifique.--&gt;
+&lt;xsl:function name=""str:suffixe" as="xs:string"&gt;
+&lt;!-- Les paramètres sont explicites, pas de valeur par défaut.--&gt;
+  &lt;xsl:param name="source"/&gt;
+  &lt;xsl:sequence select="
+      if (contains($source, '/')
+      then str:suffixe(substring-after($source,'/'))
+      else $source"/&gt;
+&lt;/xsl:function&gt;</pre><pre class="brush: xml;">&lt;!--Dans la condition match de la déclaration d'un template.--&gt;
+&lt;xsl:template match="*[str:suffixe(@href)='index.html']"/&gt;
+
+&lt;!--Dans le select lors de l'appel.--&gt;
+&lt;xsl:apply-templates select="*[str:suffixe(@href)]"/&gt;
+
+&lt;!--Ou n'importe où ailleurs.--&gt;
+&lt;xsl:if test="*[str:suffixe(@href)]"/&gt;
+</pre></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_if.asp">xsl:if</a></td><td><pre class="brush: xml;">&lt;xsl:if test="name()='P'"]&gt;
+&lt;!--Ce qu'on fait si c'est bon.--&gt;
+...
+&lt;/xsl:if&gt;</pre></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_import.asp">xsl:import</a></td><td><pre class="brush: xml;">&lt;!--En premier dans la feuille XSLT--&gt;
+&lt;xsl:import href="lib.xsl"/&gt;
+
+&lt;!--Quasiment équivalent--&gt;
+&lt;xsl:include href="lib.xsl"/&gt;
+</pre></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-import-schema">xsl:import-schema</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_include.asp">xsl:include</a></td><td><pre class="brush: xml;">&lt;!--En premier dans la feuille XSLT--&gt;
+&lt;xsl:import href="lib.xsl"/&gt;
+
+&lt;!--Quasiment équivalent--&gt;
+&lt;xsl:include href="lib.xsl"/&gt;
+</pre></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_key.asp">xsl:key</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-namespace">xsl:namespace</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-next-match">xsl:next-match</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_number.asp">xsl:number</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_otherwise.asp">xsl:otherwise</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_output.asp">xsl:output</a></td><td><pre class="brush: xml;">&lt;xsl:output method="xml" version="1.0"
+encoding="UTF-8" indent="yes"/&gt;</pre></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-output-character">xsl:output-character</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_param.asp">xsl:param</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-perform-sort">xsl:perform-sort</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_processing-instruction.asp">xsl:processing-instruction</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3.org/TR/xslt20/#element-result-document">xsl:result-document</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_sort.asp">xsl:sort</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_stylesheet.asp">xsl:stylesheet</a></td><td><pre class="brush: xml;">&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"&gt;
+&lt;!--Contenu de la transformation--&gt;
+...
+&lt;/xsl:stylesheet&gt;</pre></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_template.asp">xsl:template</a></td><td><pre class="brush: xml;">&lt;xsl:template match="TITLE"&gt;
+&lt;!--Ce que dois faire le template--&gt;
+...
+&lt;/xsl:template&gt;</pre><pre class="brush: xml;">&lt;xsl:template name="TempPourLesTitres"&gt;
+&lt;!--Ce que doit faire le template--&gt;
+...
+&lt;/xsl:template&gt;</pre></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_text.asp">xsl:text</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_value-of.asp">xsl:value-of</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_variable.asp">xsl:variable</a></td><td><pre class="brush: xml;">&lt;xsl:variable name="nomVariable" select="valeurVariableEnXpath" as="xs:someType"/&gt;</pre></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_when.asp">xsl:when</a></td><td></td></tr><tr><td><a target="_blank" href="http://www.w3schools.com/xsl/el_with-param.asp">xsl:with-param</a></td><td></td></tr></table><script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script><script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script><script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script><script type="text/javascript" src="syntaxhighlighter/scripts/shBrushPlain.js"></script><script type="text/javascript" src="syntaxhighlighter/scripts/shBrushPython.js"></script><script type="text/javascript">
+                    SyntaxHighlighter.all()
+                </script></body></html>

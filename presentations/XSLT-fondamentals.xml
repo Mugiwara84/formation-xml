@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="2impress.xsl" type="text/xsl"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+  <head>
+    <title>XSLT Fondamentaux</title>
+    <script type="text/javascript">
+    function showStuff(show, hide) {
+    document.getElementById(show).style.display = 'block';    
+    // hide the link
+    hide.style.display = 'none';
+}
+function hideStuff(hide) {            
+    hide.style.display = 'none';
+}
+</script>
+  </head>
+  <body>
+    <div class="intro" style="color:white; padding:80px;background-color:black;" data-x="-60000"
+      data-scale="50" data-out-of-sequence="true">
+      <div>
+        <img src="images/autobot-logo.jpg" style="float:right;" alt="XSLT is not dead." />
+        <h1 style="color:white;">XSLT Fondamentaux</h1>
+      </div>
+      <h2 style="color:white;margin-top:2em;margin-left:2em;text-aling:center;">Paradigmes et
+        éléments.</h2>
+    </div>
+    <div id="map" data-x="25000" data-y="0" data-scale="50" data-out-of-sequence="true">
+      <h1>Plan de la présentation</h1>
+    </div>
+    <div class="chapter" data-x="20000" data-y="-8000" data-scale="50">
+      <h1>XSLT : XML Stylesheet Transformation </h1>
+    </div>
+    <div data-y="-5500">
+    <h2>XSLT : XML Stylesheet Transformation</h2>
+      <p style="text-decoration: underline;">Un langage avec une syntaxe XML.</p>
+      <ul>
+        <li>chaque "fonction" est un élément XML.</li>
+      </ul>
+      <p><span style="text-decoration: underline;">Une "utilisation" :</span> XSLT(XML)->XML</p>
+      <ul>
+        <li>On transforme du XML en XML avec du XML.</li>
+        <li>Formellement, un document en entrée, un en sortie.</li>
+        <li>XSLT 2.0 permet d'avoir plusieurs documents (entrée/sortie).</li>
+      </ul>
+    </div>
+    <div>
+      <h2>XSLT quels "use-case" ?</h2>
+      <ul>
+        <li>Transformer/Modifier/Enrichir des documents XML.</li>
+        <li>Générer des documents XML.</li>
+        <li>Présenter des documents XML.</li>
+        <li>Toute autre manipulation de documents XML.</li>
+      </ul>
+    </div>
+    <div class="chapter" data-x="20000" data-y="-3000" data-scale="50">
+      <h1>XSLT : Langage de transformation</h1>
+    </div>
+    <div data-y="-500">
+      <h2>Langage de transformation de document XML</h2>
+      <span id="xslt-models1" onclick="showStuff('xslt-models2', this); return false;"><img
+          src="images/xslt-models1.png" alt="Un fichier XML en entrée, un fichier XML produit."
+         /></span>
+      <span id="xslt-models2" onclick="showStuff('xslt-models1', this); return false;"
+        style="display:none;"><img src="images/xslt-models2.png"
+          alt="Plusieurs fichiers XML en entrée, plusieurs fichiers XML produits." /></span>
+    </div>
+    <div>
+      <h3>L'élément xsl:stylesheet</h3>
+      <p>L'élément racine (alias xsl:transform)</p>
+      <pre class="brush: xml;"><![CDATA[<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<!--Contenu de la transformation-->
+...
+</xsl:stylesheet>]]></pre>
+      <ul>
+        <li>le namespace xslt doit être déclaré</li>
+        <li>la version "1.0" (1999) ou "2.0" (2007).</li>
+        <li>Il existe une version 3.0 depuis 2017.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>L'élément xsl:output</h3>
+      <p>Définit la méthode de "serialization".</p>
+      <pre class="brush: xml;"><![CDATA[<xsl:output method="xml" version="1.0"
+encoding="UTF-8" indent="yes"/>]]></pre>
+      <ul>
+        <li>la méthode ('xml', 'html' ou 'text')</li>
+        <li>la version</li>
+        <li>L'encodage</li>
+        <li>Autres paramètres du document de sortie (indentation, DOCTYPE, etc.)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>D'autres éléments controlant la sortie</h3>
+      <p><span style="text-decoration: underline;">xsl:result-document</span> :</p>
+      <ul>
+        <li>Permet d'avoir plusieurs documents en sortie</li>
+      </ul>
+      <p><span style="text-decoration: underline;">xsl:character-map</span>&amp;<span
+          style="text-decoration: underline;">xsl:output-character</span> :</p>
+      <ul>
+        <li>Permet de réencoder certains caractères.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Des éléments pour chaque 'objet' xml 1/2</h3>
+      <p><span style="text-decoration: underline;">xsl:element</span> :</p>
+      <ul>
+        <li>pour écrire un élément XML dans le fichier de sortie.</li>
+      </ul>
+      <pre class="brush: xml;"><![CDATA[<xsl:element name="nom-element">
+<!--Contenu de l'élément-->
+...
+</xsl:element>]]></pre>
+      <p><span style="text-decoration: underline;">xsl:attribute</span> :</p>
+      <ul>
+        <li>pour ajouter un attribut à un élément XML dans le fichier de sortie.</li>
+      </ul>
+      <pre class="brush: xml;"><![CDATA[<xsl:attribute name="nom-element" select="valeur-attribut-xpath"/>]]></pre>
+    </div>
+    <div>
+      <h3>Des éléments pour chaque 'objet' xml 2/2</h3>
+      <p><span style="text-decoration: underline;">xsl:comment</span> :</p>
+      <ul>
+        <li>pour écrire un commentaire XML dans le fichier de sortie.</li>
+      </ul>
+      <pre class="brush: xml;"><![CDATA[<xsl:comment">
+<!--Contenu du commentaire-->
+...
+</xsl:comment>]]></pre>
+      <p><span style="text-decoration: underline;">xsl:processing-instruction</span> :</p>
+      <ul>
+        <li>pour ajouter des instructions au fichier de sortie.</li>
+      </ul>
+      <pre class="brush: xml;"><![CDATA[<!--Cet élément-->
+<xsl:processing-instruction name="xml-stylesheet"
+select="('href=&quot;my-css.css&quot;', 'type=&quot;text/css&quot;)"/>
+
+<!--Produit cette instruction dans le fichier de sortie-->
+<?xml-stylesheet href="book.css" type="text/css"?>]]></pre>
+    </div>
+    <div>
+      <h3>Des éléments pour écrire directement dans le fichier de sortie.</h3>
+      <p><span style="text-decoration: underline;">xsl:text</span> :</p>
+      <ul>
+        <li>pour écrire du texte littéral dans le fichier de sortie.</li>
+      </ul>
+      <pre class="brush: xml;"><![CDATA[<xsl:text>">
+Chaîne de texte.
+</xsl:text>]]></pre>
+      <p><span style="text-decoration: underline;">xsl:value-of</span> :</p>
+      <ul>
+        <li>pour écrire le résultat d'un XPath dans le fichier de sortie.</li>
+      </ul>
+      <pre class="brush: xml;"><![CDATA[<xsl:value-of select="@id"/>]]></pre>
+    </div>
+    <div>
+      <h2>Exercice 5</h2>
+      <p>Une première transformation à la mode "Hello World"</p>
+    </div>
+    <div class="chapter" data-x="20000" data-y="2000" data-scale="50">
+      <h1>XSLT : Langage de templating</h1>
+    </div>
+    <div data-y="4500">
+      <h2>Langage de templating</h2>
+      <span id="xslt-template1" onclick="showStuff('xslt-template2', this); return false;"><img
+          src="images/xslt-template1.png" alt="Un fichier XML source." /></span>
+      <span id="xslt-template2" onclick="showStuff('xslt-template1', this); return false;"
+        style="display:none;"><img src="images/xslt-template2.png"
+          alt="On définit des templates pour chaque élément." /></span>
+    </div>
+    <div>
+      <h3>L'élément xsl:template 1/2</h3>
+      <pre class="brush: xml;"><![CDATA[<xsl:template match="TITLE">
+<!--Ce que dois faire le template-->
+...
+</xsl:template>]]></pre>
+      <ul>
+        <li>Définition d'une "fonction".</li>
+        <li>@match correspond à l'expression XPath déclenchant le template.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>L'élément xsl:template 2/2</h3>
+      <pre class="brush: xml;"><![CDATA[<xsl:template name="TempPourLesTitres">
+<!--Ce que doit faire le template-->
+...
+</xsl:template>]]></pre>
+      <ul>
+        <li>Définition d'une "fonction" que l'on peut appeler.</li>
+        <li>@name nom de la fonction pour l'appeler.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>3 éléments pour appeler les "fonctions"</h3>
+      <p><span style="text-decoration: underline;">xsl:apply-templates</span> :</p>
+      <ul>
+        <li>Le plus usuel, s'appuie sur le contenu de la source.</li>
+      </ul>
+      <p><span style="text-decoration: underline;">xsl:call-template</span> :</p>
+      <ul>
+        <li>Appel un template à partir de son nom, indépendamment de la source.</li>
+      </ul>
+      <p><span style="text-decoration: underline;">xsl:function</span> :</p>
+      <ul>
+        <li>Pour plus tard...</li>
+      </ul>
+    </div>
+    <div>
+      <h3>xsl:apply-templates 1/2</h3>
+      <ul>
+        <li>s'appuie sur le processeur XML.</li>
+        <li>s'appelle en fonction de l'arbre source.</li>
+      </ul>
+    </div>
+    <div>
+      <span id="xslt-process1" onclick="showStuff('xslt-process2', this); return false;"><img
+          src="images/xslt-process1.png" alt="" /></span>
+      <span id="xslt-process2" onclick="showStuff('xslt-process3', this); return false;"
+        style="display:none;"><img src="images/xslt-process2.png" alt="" /></span>
+      <span id="xslt-process3" onclick="showStuff('xslt-process4', this); return false;"
+        style="display:none;"><img src="images/xslt-process3.png" alt="" /></span>
+      <span id="xslt-process4" onclick="showStuff('xslt-process5', this); return false;"
+        style="display:none;"><img src="images/xslt-process4.png" alt="" /></span>
+      <span id="xslt-process5" onclick="showStuff('xslt-process6', this); return false;"
+        style="display:none;"><img src="images/xslt-process5.png" alt="" /></span>
+      <span id="xslt-process6" onclick="showStuff('xslt-process7', this); return false;"
+        style="display:none;"><img src="images/xslt-process6.png" alt="" /></span>
+      <span id="xslt-process7" onclick="showStuff('xslt-process8', this); return false;"
+        style="display:none;"><img src="images/xslt-process7.png" alt="" /></span>
+      <span id="xslt-process8" onclick="showStuff('xslt-process9', this); return false;"
+        style="display:none;"><img src="images/xslt-process8.png" alt="" /></span>
+      <span id="xslt-process9" onclick="showStuff('xslt-process10', this); return false;"
+        style="display:none;"><img src="images/xslt-process9.png" alt="" /></span>
+      <span id="xslt-process10" onclick="showStuff('xslt-process11', this); return false;"
+        style="display:none;"><img src="images/xslt-process10.png" alt="" /></span>
+      <span id="xslt-process11" onclick="showStuff('xslt-process12', this); return false;"
+        style="display:none;"><img src="images/xslt-process11.png" alt="" /></span>
+      <span id="xslt-process12" onclick="showStuff('xslt-process1', this); return false;"
+        style="display:none;"><img src="images/xslt-process12.png" alt="" /></span>
+    </div>
+    <div>
+      <h3>xsl:apply-templates 2/2</h3>
+      <ul>
+        <li>@select : donne la condition Xpath de déclenchement.</li>
+        <li>select="*" est implicite</li>
+      </ul>
+      <pre class="brush : xml;"><![CDATA[<xsl:apply-templates select="*"/>
+
+<!--Mais cette syntaxe est équivalente-->
+<xsl:apply-templates/>]]></pre>
+      <ul>
+        <li>select="*" c'est tout les éléments enfants.</li>
+        <li>select="@*" c'est tout les attributs de l'élément courant.</li>
+        <li>select="node()" c'est tout les noeuds enfants</li>
+        <li>select="node()" équivalent à select="*|text()|comment()|processing-instruction()"</li>
+      </ul>
+    </div>
+    <div>
+      <h3>xsl:call-template</h3>
+      <p>Cette fois pas d'appel "implicite", mais un appel explicite.</p>
+      <pre class="brush: xml;"><![CDATA[<xsl:call-template name="nomDuTemplate"/>]]></pre>
+    </div>
+    <div>
+      <span id="xslt-call-process1" onclick="showStuff('xslt-call-process2', this); return false;"
+          ><img src="images/xslt-call-process1.png" alt="" /></span>
+      <span id="xslt-call-process2" onclick="showStuff('xslt-call-process3', this); return false;"
+        style="display:none;"><img src="images/xslt-call-process2.png" alt="" /></span>
+      <span id="xslt-call-process3" onclick="showStuff('xslt-call-process1', this); return false;"
+        style="display:none;"><img src="images/xslt-call-process3.png" alt="" /></span>
+    </div>
+    <div>
+      <p>xsl:call-template embarque le contexte où il est appelé : </p>
+      <pre class="brush : xml;"><![CDATA[
+    <xsl:template match="TITLE">
+        <xsl:call-template name="jembarquelecontexte"/>
+    </xsl:template>
+    
+    <xsl:template name="jembarquelecontexte">
+        <xsl:value-of select="."/> <!-- Renvoie Th -->
+        <xsl:value-of select="parent::*/name()"/> <!-- Renvoie PLAY -->
+    </xsl:template>]]></pre>
+    </div>
+    <div>
+      <h3>Les templates sont des fonctions.</h3>
+      <p>Avec appel explicite ou implicite.</p>
+      <p>Elles peuvents prendre des paramètres</p>
+      <ul>
+        <li>xsl:param dans la déclaration de la fonction</li>
+      </ul>
+      <pre class="brush: xml;"><![CDATA[<xsl:template match="*" name="AToutFaire">
+   <xsl:param name="NomParam" select="ValeurParDefaut"/>
+</xsl:template>]]>
+</pre>
+      <ul>
+        <li>xsl:with-param dans l'appel de la fonction</li>
+      </ul>
+      <pre class="brush: xml;"><![CDATA[<xsl:apply-templates select="*">
+   <xsl:with-param name="NomParam" select="ValeurDuParam"/>
+</xsl:template>]]>
+</pre>
+    </div>
+    <div>
+      <h3>Utilisation de modes.</h3>
+      <p>Pour associer à un même XPath plusieurs traitements.</p>
+      <pre class="brush: xml;"><![CDATA[
+        <xsl:template match="*">
+          <xsl:apply-tempates select="*" mode="nomElement"/>
+          <xsl:apply-tempates select="*" mode="valeurElement"/>
+        </xsl:template>
+        
+        <xsl:template match="*" mode="nomElement">
+          <xsl:value-of select="name()"/>
+        </xsl:template>
+        
+        <xsl:template match="*" mode="valeurElement">
+          <xsl:value-of select="."/>
+        </xsl:template>
+        ]]>
+      </pre>
+    </div>
+    <div>
+      <h3>Utilisation de priorités.</h3>
+      <p>Pour indiquer quel template s'applique lorsque plusieurs templates correspondent.</p>
+      <pre class="brush: xml;"><![CDATA[
+        <xsl:template match="*[name()='TITLE']" priority="1">
+          <xsl:value-of select="name()"/>
+        </xsl:template>
+        
+        <xsl:template match="*[parent::PLAY]" priority="2">
+          <xsl:value-of select="."/>
+        </xsl:template>
+        ]]>
+      </pre>
+    </div>
+    <div>
+      <h2>Exercice 6</h2>
+      <p>Construction de deux squelettes de transformation.</p>
+    </div>
+    <div class="chapter" data-x="20000" data-y="7000" data-scale="50">
+      <h1>XSLT : Langage déclaratif</h1>
+    </div>
+    <div data-y="9500">
+      <h2>XSLT est un langage déclaratif.</h2>
+      <p>Paradigme de programmation qui s'oppose aux langages impératifs.</p>
+    </div>
+    <div>
+      <h2>Langage déclaratif vs Langage impératif</h2>
+      <ul>
+        <li>Langage impératif : instruction séquentielle</li>
+        <li>Langage déclaratif : déclaration de ce que l'on doit faire</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Langage déclaratif vs Langage impératif</h2>
+      <ul>
+        <li>Langage de programmation impératif : "Voilà ce que tu dois faire, quand et
+          comment".</li>
+        <li>Langage de programmation déclaratif : "Quand, il se passe ça, tu dois faire ça".</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Langage déclaratif vs Langage impératif</h2>
+      <ul>
+        <li>Langage impératif : Java, C, C#, assembleur...</li>
+        <li>Langage déclaratif : HTML, CSS, XSLT,...</li>
+      </ul>
+    </div>
+    <div>
+      <h2>XSLT est déclaratif</h2>
+      <p>On lui dit :</p>
+      <blockquote>
+        <p>Quand tu rencontres cet élément, tu appelles cette fonction.</p>
+      </blockquote>
+      <p>Et "en gros", c'est tout.</p>
+    </div>
+    <div>
+      <h3>XSLT peut être impératif, en fait...</h3>
+      <p>On a déjà vu qu'on pouvait faire des appels explicites.</p>
+      <p>Mais, il y aussi des éléments de programmation "classiques" :</p>
+      <ul>
+        <li>xsl:for-each : pour itérer sur une liste</li>
+        <li>xsl:if : condition classique (à noter qu'il n'y a pas de else)</li>
+        <li>xsl:choose : pour faire du ifThen/ifThen/.../else classique</li>
+      </ul>
+    </div>
+    <div>
+      <h3>xsl:for-each</h3>
+      <p>On itère sur une liste produite par XPath.</p>
+      <pre class="brush: xml;"><![CDATA[<xsl:for-each select="//P">
+<!--Ce que l'on fait à chaque itération-->
+    <xsl:value-of select="text()"/>
+</xsl:for-each>]]></pre>
+      <p>A l'intérieur de la boucle, le contexte est l'élément courant de l'itération.</p>
+    </div>
+    <div>
+      <span id="xslt-for-process1" onclick="showStuff('xslt-for-process2', this); return false;"
+          ><img src="images/xslt-for-process1.png" alt="" /></span>
+      <span id="xslt-for-process2" onclick="showStuff('xslt-for-process3', this); return false;"
+        style="display:none;"><img src="images/xslt-for-process2.png" alt="" /></span>
+      <span id="xslt-for-process3" onclick="showStuff('xslt-for-process4', this); return false;"
+        style="display:none;"><img src="images/xslt-for-process3.png" alt="" /></span>
+      <span id="xslt-for-process4" onclick="showStuff('xslt-for-process1', this); return false;"
+        style="display:none;"><img src="images/xslt-for-process4.png" alt="" /></span>
+    </div>
+    <div>
+      <h3>xsl:if</h3>
+      <p>Une condition classique avec un XPath évalué comme booléan.</p>
+      <pre class="brush: xml;"><![CDATA[<xsl:if test="name()='P'"]>
+<!--Ce qu'on fait si c'est bon.-->
+...
+</xsl:if>]]></pre>
+    </div>
+    <div>
+      <h3>xsl:choose</h3>
+      <p>Des conditions xsl:when qui marchent comme des xsl:if exclusifs et séquentiels.</p>
+      <pre class="brush: xml;"><![CDATA[<xsl:choose>
+  <xsl:when test="A">
+    ...
+  </xsl:when>
+  <xsl:when test="B">
+    ...
+  </xsl:when>
+  <!--La condition 'à l'exclusion de toutes les autres'-->
+  <xsl:otherwise/>
+</xsl:choose>]]></pre>
+    </div>
+    <div class="chapter" data-x="20000" data-y="12000" data-scale="50">
+      <h1>XSLT : Langage "fonctionnel"</h1>
+    </div>
+    <div data-y="14500">
+      <h2>XSLT est un langage "fonctionnel"</h2>
+      <p>Paradigme de programmation :</p>
+      <ul>
+        <li>Déclaration de fonctions.</li>
+        <li>Pas d'effet de bords.</li>
+        <li>"First-class" ou "high-order" fonctions.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Déclaration de fonctions</h2>
+      <ul>
+        <li>xsl:template : pour la déclaration de fonction appelée directement en XSLT.</li>
+        <li>xsl:function : pour la déclaration de fonction appelée par expressoin XPath.</li>
+        <li>xsl:import et xsl:include : pour l'import de librairies de fonctions.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>xsl:function 1/2</h3>
+      <p>Déclaration d'une fonction que l'on peut appeler dans les expressions XPath.</p>
+      <pre class="brush: xml;"><![CDATA[<!--La déclaration doit se faire "au début" de la feuille XSLT 
+et elle doit s'appuyer sur un namespace spécifique.-->
+<xsl:function name="str:suffixe" as="xs:string">
+<!-- Les paramètres sont explicites, pas de valeur par défaut.-->
+  <xsl:param name="source"/>
+  <xsl:sequence select="
+      if (contains($source, '/')
+      then str:suffixe(substring-after($source,'/'))
+      else $source"/>
+</xsl:function>]]></pre>
+    </div>
+    <div>
+      <h3>xsl:function 2/2</h3>
+      <p>Elle peut ensuite être appelée dans une requête XPath.</p>
+      <pre class="brush: xml;"><![CDATA[<!--Dans la condition match de la déclaration d'un template.-->
+<xsl:template match="*[str:suffixe(@href)='index.html']"/>
+
+<!--Dans le select lors de l'appel.-->
+<xsl:apply-templates select="*[str:suffixe(@href)]"/>
+
+<!--Ou n'importe où ailleurs.-->
+<xsl:if test="*[str:suffixe(@href)]"/>
+]]></pre>
+    </div>
+    <div>
+      <h3>xsl:import&amp;xsl:include</h3>
+      <p>Import de feuilles XSLT externes.</p>
+      <pre class="brush: xml;"><![CDATA[<!--En premier dans la feuille XSLT-->
+<xsl:import href="lib.xsl"/>
+
+<!--Quasiment équivalent-->
+<xsl:include href="lib.xsl"/>
+]]></pre>
+    </div>
+    <div>
+      <h2>Pas d'effets de bord.</h2>
+      <p>Principes de "pure fonction"</p>
+      <ul>
+        <li>f(X) = f(X), si X=X</li>
+      </ul>
+      <p style="text-decoration: underline;">Pas de concept de "variable".</p>
+      <ul>
+        <li>Les "variables" se comportent comme des constantes ou des "immutable".</li>
+      </ul>
+    </div>
+    <div>
+      <h3>xsl:variable</h3>
+      <p>Nom trompeur, devrait s'appeler constant ou immutable.</p>
+      <pre class="brush: xml;"><![CDATA[<xsl:variable name="nomVariable" select="valeurVariableEnXpath" as="xs:someType"/>]]></pre>
+      <ul>
+        <li>Une fois une valeur affectée, on ne peut pas la modifier.</li>
+        <li>On l'appelle avec le préfixe '$' devant le nom.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Exercice 7</h2>
+      <p>Calcul d'une valeur pour stockage dans une variable.</p>
+    </div>
+    <div class="chapter" data-x="20000" data-y="17000" data-scale="50">
+      <h1>XSLT : Bonnes pratiques</h1>
+    </div>
+    <div data-y="19500">
+      <h2>"Le XSLT c'est inmaintenable"</h2>
+      <ul>
+        <li>C'est un sujet qui revient régulièrement sur les forums de développement.</li>
+        <li>Impression en partie due à la difficulté à passer d'un "état d'esprit" procédural à déclaratif.</li>
+        <li>Et lié au fait qu'on peut effectuer un même traitement de multiples manières en XSLT.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Privilégier l'approche fonctionnelle</h2>
+      <ul>
+        <li>Utiliser le plus souvent possible les xsl:template match.</li>
+        <li>Utiliser le moins souvent possible les xsl:for-each, xsl:if et xsl:choose.</li>
+        <li>Lorsqu'il faut mutualiser du code, essayer d'utiliser les mode pour le faire et pas à l'aide de xsl:call-template ou de xsl:function.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>xsl:call-template vs xsl:function</h2>
+      <ul>
+        <li>On peut faire avec xsl:function presque tout ce qu'on peut faire avec xsl:call-template et les templates name.</li>
+        <li>Mais on peut typer ce qui est retourné par la fonction.</li>
+        <li>On peut se servir de la fonction comme d'un XPath.</li>
+        <li>Dans les templates nommés, le contexte a été passé de manière silencieuse, ça nuit à la lisibilité. Dans les xsl:function, l'appel est explicite.</li>
+        <li>Le xsl:call-template c'est le mal...</li>
+        <li>Un thread sur ce sujet qui est plus modéré : <a href="https://www.oxygenxml.com/archives/xsl-list/200707/msg00450.html">lien</a> </li>
+      </ul>
+    </div>
+    <div>
+      <h2>Enchaîner les transfos simples plutôt que d'en faire une unique complexe.</h2>
+    </div>
+    <div>
+      <h2>Utiliser des fonctions existantes plutôt que de réinventer la poudre.</h2>
+      <ul>
+        <li>Il y a plein de fonctions xslt et xpath depuis la version 2.0 : https://www.w3schools.com/xml/xsl_functions.asp</li>
+        <li>Il y a une bibliothèque de fonctions à importer ici : http://www.xsltfunctions.com/xsl/functx-1.0-doc-2007-01.xsl</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Ne pas utiliser xsl:element et xsl:attribute quand c'est possible.</h2>
+      <p>Avant :</p>
+      <pre class="brush: xml;"><![CDATA[
+        <xsl:element name="img">
+          <xsl:attribute name="src" select="$product/image/@src" />
+          <xsl:attribute name="width" select="$product/image/@width" />
+          <xsl:attribute name="height" select="$product/image/@height" />
+          <xsl:attribute name="alt" select="$product/image" />
+           <xsl:attribute name="class" select="$product/@type" />
+        </xsl:element>
+        ]]></pre>
+      <p>Apres :</p>
+      <pre class="brush: xml;"><![CDATA[
+          <img src="{$product/image/@src}" width="{$product/image/@width}" height="{$product/image/@height}" alt="{$product/image}" class="{$product/@type}" />
+        ]]></pre>
+    </div>
+  </body>
+</html>

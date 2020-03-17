@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="2impress.xsl" type="text/xsl"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+  <head>
+    <title>XML galaxy</title>
+    <script type="text/javascript">
+    function showStuff(show, hide) {
+    document.getElementById(show).style.display = 'block';    
+    // hide the link
+    hide.style.display = 'none';
+}
+</script>
+  </head>
+  <body>
+    <div class="intro" style="color:white; padding:80px;background-color:black;" data-x="-60000"
+      data-scale="50" data-out-of-sequence="true">
+      <div>
+       <!-- <img src="images/galaxy.png" style="float:right;" alt="une galaxie" />-->
+        <h1 style="color:white;">XML galaxy</h1>
+      </div>
+      <h2 style="color:white;margin-top:2em;margin-left:2em;text-aling:center;">Bienvenue dans l'univers du X.</h2>
+      <p style="color:white;text-align:center;margin-left:1em;margin-top:2em;">Guillaume Jardillier (+ Eric Sigaud + Jérémie Leonard)</p>
+    </div>
+    <div id="map" data-x="25000" data-y="0" data-scale="50" data-out-of-sequence="true">
+      <h1>Plan de la présentation</h1>
+    </div>
+    <div class="chapter" data-x="20000" data-y="-10000" data-scale="50">
+      <h1>XML</h1>
+    </div>
+    <div data-y="-7500">
+      <h1>eXtensible Mark-up Language</h1>
+      <p>La version 1.0 est sortie en 1998.</p>
+      <p>Langage de description de données structurées.</p>
+      <p>Dernière version, la 1.1, date de 2004.</p>
+      <p>Simplification d'un standard plus ancien, le SGML.</p>
+      <p>De nombreux formats sont issus du XML : RSS, XHTML, SVG, etc...</p>
+    </div>
+    <div>
+      <h1>XML : Quels cas d'utilisation ?</h1>
+      <ul>
+        <li>Echanges automatisés entre systèmes informatiques</li>
+        <li>Format de données facilitant la séparation modèle/vue</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Echange automatisé entre systèmes informatiques</h2>
+      <p><span style="text-decoration:underline;">Mécanismes de validation :</span></p>
+      <ul><li>Formalisation d'interfaces d'échanges</li></ul>
+      <p><span style="text-decoration:underline;">Mécanismes d'encodage :</span></p>
+        <ul><li>Formalisation des jeux de caractères utilisés</li></ul>
+        <p><span style="text-decoration:underline;">Mécanismes de parsing :</span></p>
+      <ul><li>Formalisation du traitement des données échangées</li></ul>      
+    </div>
+    <div>
+      <h2 class="img">Architecture simple à base de XML</h2>
+      <img src="./images/archi-xml1.png" alt="Echanges de données XML"/>
+    </div>
+    <div>
+      <h2>Format de données facilitant la séparation modèle/vue</h2>
+      <p><span style="text-decoration:underline;">Mécanismes de transformation :</span></p>
+      <ul><li>Multiples rendus pour un même modèle</li></ul>
+      <p><span style="text-decoration:underline;">Mécanismes de stockage :</span></p>
+      <ul>
+        <li>Fonctionnalités similaires aux BDD relationelles</li>
+      </ul>
+    </div>
+    <div>
+      <h1>XML, le modèle</h1>
+      <ul>
+        <li>Des éléments</li>
+        <li>Des attributs</li>
+        <li>Des commentaires</li>
+        <li>Des instructions techniques</li>
+        <li>Des entités</li>
+      </ul>
+    </div>
+    <div>
+      <h1>XML, la vue</h1>
+      <pre class="brush: xml;"><![CDATA[
+<UnDocument>
+  <DuTexte unAttribut='rouge'>On peut mettre ce qu'on veut, ou presque... (&gt;)</DuTexte>
+  <DeLaDonnee date='01/02/11'>
+    <Variable>12</Variable>
+    <Variable>16</Variable>
+  </DeLaDonnee>
+</UnDocument>]]></pre>
+    </div>
+    <div>
+      <h2>Les éléments XML</h2>
+      <p>Facile, quelques contraintes de syntaxe sur le nom et des '&lt;' et '>'</p>
+      <pre class="brush: xml;"><![CDATA[<UnElement>Du texte qu'on veut mettre dans l'élément</UnElement>]]></pre>      
+    </div>
+    <div>
+      <h2>Les contraintes des éléments</h2>
+      <p>Contient des lettres, chiffres, tirets, underscores et points (pas d'espaces).</p>
+      <p>Doit commencer par un underscore ou une lettre.</p>
+      <p>Ne doit pas commencer par xml, Xml, XML, etc...</p>
+    </div>
+    <div>
+      <h2>Les attributs XML</h2>
+      <p>Facile, on les met dans la "balise" de l'élément</p>
+      <pre class="brush: xml;"><![CDATA[<UnElement unAttribut='valeurAttribut'/>]]></pre>      
+    </div>
+    <div>
+      <h2>Les commentaires</h2>
+      <p>Facile, on les met avec une syntaxe ad-hoc</p>
+      <pre class="brush: xml;"><![CDATA[<!-- Là je peux dire et faire ce que je veux !!! -->]]></pre>      
+    </div>
+    <div>
+      <h2>Les instructions techniques ou processing instruction</h2>
+      <p>Facile... pardon, les quoi ???</p>
+      <pre class="brush: xml;"><![CDATA[<?xml-stylesheet href="2impress.xsl" type="text/xsl"?>]]></pre>
+      <pre class="brush: xml;"><![CDATA[<?xml-stylesheet type="text/css" href="style.css"?>]]></pre>
+    </div>
+    <div>
+      <h2>Les entités</h2>
+      <p>C'est un mécanisme d'échappement des caractères réservés à l'aide des caractères &amp; et ;</p>
+      <ul>
+        <li><![CDATA[&amp;]]> pour le caractère '&amp;'</li>
+        <li><![CDATA[&apos;]]> pour le caractère '&apos;'</li>
+        <li><![CDATA[&quot;]]> pour le caractère '&quot;'</li>
+        <li><![CDATA[&gt;]]> pour le caractère '&gt;'</li>
+        <li><![CDATA[&lt;]]> pour le caractère '&lt;'</li>
+      </ul>                
+    </div>
+    <div>
+      <h1>XML, les principes</h1>
+      <ul>
+        <li>Un prologue</li>
+        <li>Des balises ouvertes et fermées explicitement</li>
+        <li>Un élément racine</li>
+        <li>Une représentation sous forme d'arbre (pas d'overlap)</li>
+        <li>Des espaces de noms (argh...)</li>
+        <li>Des attributs monovalués avec valeur entre ' ou "</li>
+        <li>Deux niveaux de conformité : well-formed&amp;valid</li>        
+      </ul>
+    </div>
+    <div>
+      <h2>Un prologue</h2>
+      <p>Tout document XML doit commencer par un prologue.</p>
+      <!--<pre class="brush : xml;"><![CDATA[<?xml version="1.0" encoding="utf-8"?>]]></pre>-->
+      <img src="images/prologue.png" alt=""/>
+    </div>
+    <div>
+      <h2>Des balises ouvertes et fermées explicitement</h2>
+    <p>Avec une balise ouvrante et fermante</p>
+    <pre class="brush : xml"><![CDATA[<element>contenu de l'élément...</element>]]></pre>
+    <p>Avec une seule balise ouvrante/fermante</p>
+    <pre class="brush : xml"><![CDATA[<element/>]]></pre>
+    </div>
+    <div>
+      <h2>Un élément racine</h2>
+      <p>Un document XML est un arbre.</p>
+      <pre class="brush: xml;"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<racine>
+    <branche>
+        <feuille/>
+        <feuille/>
+        <feuille/>
+    </branche>
+    <branche>
+        <feuille/>
+        <feuille/>        
+    </branche>
+    <feuille/>
+</racine>
+]]></pre>
+      <p>Tout doit être contenu dans un élément <b>unique</b> :</p>
+      <ul>
+        <li>la racine</li>
+      </ul>
+    </div>
+    <div>
+      <h2>La représentation sous forme d'arbres</h2>
+      <p>Des frères, des enfants, des parents...</p>      
+      <p>Mais pas <span style="text-decoration: line-through;">d'inceste</span>d'overlap :</p>
+      <pre class="brush : xml"><![CDATA[<p>Faire ça, <b>c'est<em>mal</b>, faut pas</em></p>]]></pre>
+    </div>
+    <div>
+      <h2>Des espaces de noms</h2>
+      <p>Permet de s'assurer qu'au sein d'un document XML pouvant contenir plusieurs vocabulaires XML différents, les noms d'éléments et d'attributs soient bien uniques.</p>
+      <p>Un espace de nom (namespace), c'est :</p>
+      <ul>
+        <li>Un URI, IRI ou URN
+          <ul><li>URI : http://www.w3.org/1999/xhtml</li>
+              <li>IRI : URI en version internationale</li>
+              <li>URN : URN:INSEE:Cequejeveux-comme-id-Bizarre</li>
+          </ul>
+        </li>
+        <li>Un préfixe associé :</li>
+      </ul>
+      <pre class="brush : xml"><![CDATA[<html xmlns:xml="http://www.w3.org/1999/xhtml">]]></pre>
+      <ul>
+        <li>On peut aussi définir un espace de nom par défaut :</li>
+      </ul>
+      <pre class="brush : xml"><![CDATA[<html xmlns="http://www.w3.org/1999/xhtml">]]></pre>
+    </div>
+    <div>
+      <h2>Des attributs non vides monovalués</h2>
+        <p>Des attributs non vides... :</p>
+        <pre class="brush : xml"><![CDATA[<!--ça c'est bien-->
+<input type="checkbox" checked="checked" />
+<!--ça c'est mal-->
+<input type="checkbox" checked/>]]></pre>
+        <p>... monovalués :</p>
+        <pre class="brush : xml"><![CDATA[<!--Ca n'est pas possible.-->
+<element attribut1="valeur1" attribut1="valeur2">
+<!--Cherchez pas, c'est pas possible non plus, enfin...-->
+<element attribut1="valeur1,valeur2">
+<!--Non...-->
+<element attribut1="[value1,valeur2]">]]></pre>
+    </div>
+    <div>
+      <h2>Des attributs dont la valeur est entre ' ou "</h2>
+      <pre class="brush: xml;"><![CDATA[<!--C'est pas bien-->
+<span id=1>...</span>
+<!--Ca c'est bien-->
+<span id="1">...</span>
+<!--Ca aussi-->
+<span id='1'>...</span>]]></pre>
+    </div>
+    <div>
+      <h2>Deux niveaux de conformité pour la syntaxe</h2>
+      <p style="text-decoration: underline;">well-formed :</p>
+      <ul><li>syntaxe conforme à la spécification XML.</li></ul>        
+      <p style="text-decoration: underline;">valid :</p>
+      <ul><li>syntaxe "well-formed" et validée contre un schéma ou un DTD.</li></ul>
+    </div>
+    <div>
+      <h2>Un document XHTML</h2>
+      <pre class="brush : xhtml"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Hello World !</title>
+</head>
+<body>    
+<p>Bah, hello world !</p>
+<img src="#" alt="Y a pas vraiment d'image."/>    
+</body>
+</html>]]></pre>     
+    </div>
+    <div>
+      <h1>Au final, XML c'est bien ou pas ?</h1>
+      <p>C'est verbeux mais rigoureux.</p>
+      <p>L'homme le lit et la machine le génère.</p>
+      <p>XML a des performances équivalentes aux autres technologies (<a href="http://www.balisage.net/Proceedings/vol10/html/Lee01/BalisageVol10-Lee01.html" target="_blank">même JSON, si si</a>).</p>
+    </div>
+    <div>      
+      <h2>Exercice 1</h2>
+      <p>Corriger la syntaxe d'un document XML.</p>
+      <p>L'exercice est <a href="./../exercices/exercice1/enonce-exo1.xhtml">là</a></p>
+    </div>
+    <div class="chapter" data-x="20000" data-y="-5000" data-scale="50">
+      <h1>Schémas XML</h1>
+    </div>
+    <div data-y="-2500">
+      <h2>XML Schema Description (XSD)</h2>
+      <p>Langage de description de la structure d'un fichier XML.</p>
+      <p>Equivalent du modèle de données des BDD Relationnelles.</p>
+    </div>
+    <div>
+      <h2>Schémas XML : quels cas d'utilisation ?</h2>
+        <ul><li>
+          Spécifier une structure de données
+        </li>
+        <li>
+          Valider une structure de données   
+        </li>
+        </ul>                
+    </div>
+    <div>
+      <h2>Concepts et principes</h2>
+      <ul>
+        <li>Description formelle d'un document XML</li>
+        <li>XSD est défini en XML.</li>
+        <li>Une syntaxe complexe et "effrayante".</li>
+        <li>Une spécification récursive : le schéma des éléments XSD (schéma XSD auto-spécifié en XSD)</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Forme générale</h2>
+      <pre class="brush: xml;"><![CDATA[
+        <!-- C'est du XML donc -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <!-- Avec un élément racine et un namespace -->
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            ...
+        </xsd:schema>]]></pre>
+    </div>
+    <div>
+      <h2>Pour l'importer dans un fichier XML afin de le valider</h2>
+      <pre class="brush: xml;"><![CDATA[
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="chemin_vers_fichier.xsd">
+        ...
+          ou xsi:noNamespaceSchemaLocation="chemin_vers_fichier.xsd"
+          si pas de namespace
+        </root>
+        ]]></pre>
+    </div>
+    <div>
+      <h2>Eléments simples</h2>
+      <ul>
+        <li>Il s'agit d'une balise (élément ou attribut) qui contient ce qu'on appelle un type simple.</li>
+        <li>Exemples : xsd:string, xsd:integer, xsd:date, xsd:boolean</li>
+      </ul>
+      <pre class="brush: xml;"><![CDATA[
+        <!-- Exemple d'élément -->
+        <xsd:element name="prenom" type="xsd:string"/>
+        <!-- Avec valeur par défaut -->
+        <xsd:element name="prenom" type="xsd:string" default="John"/>
+        <!-- Avec valeur fixe -->
+        <xsd:element name="prenom" type="xsd:string" fixed="John"/>
+        <!-- Exemple d'attribut, on peut indiquer son caractère obligatoire -->
+        <xsd:attribut name="age" type="xsd:string" use="required" />
+        <!-- Exemple d'élément où on met une restriction sur le type simple utilisé -->
+        <xsd:element name="sexe">
+           <xsd:simpleType>
+             <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="M"/>
+                <xsd:enumeration value="F"/>
+             </xsd:restriction>
+           </xsd:simpleType>
+        </xsd:element>
+        ]]></pre>
+    </div>
+    <div>
+      <h2>Eléments complexes</h2>
+      <p>Ce sont des balises qui contiennent d'autres balises ou attributs.</p>
+      <pre class="brush: xml;"><![CDATA[
+        <xsd:element name="personne">
+        <!-- On précise à l'aide de cette balise qu'il est complexe -->
+        <xsd:complexType>
+            <!-- Les éléments doivent être encapsulés par une balise
+            xsd:all, xsd:sequence ou xsd:choice (voir après) -->
+            <xsd:sequence>
+                <xsd:element name="nom" type="xsd:string"/>
+                <!-- On peut préciser le nombre de fois minimum
+                et maximum qu'un élément doit apparaître -->
+                <xsd:element name="prenom" type="xsd:string"
+                minOccurs="2" maxOccurs="5"/>
+            </xsd:sequence>
+            <!-- On définit les attributs ici -->
+            <xsd:attribute name="age" type="xsd:integer"/>
+            <xsd:attribute name="sexe" type="xsd:string"/>
+        </xsd:complexType>
+        </xsd:element>
+        ]]></pre>
+    </div>
+    <div>
+      <h2>Eléments complexes</h2>
+      <p>On peut encapsuler les éléments dans :</p>
+      <ul>
+        <li>xsd:all : tous les éléments doivent apparaître. maxOccurs est forcément égal à 1, minOccurs est par défaut à 1 mais peut prendre la valeur 0</li>
+        <li>xsd:sequence : tous les éléments apparaissent dans l'ordre. minOccurs et maxOccurs sont par défaut à 1.</li>
+        <li>xsd:choice : un seul des éléments apparaît à la fois. minOccurs et maxOccurs sont par défaut à 1.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>xsd:choice</h2>
+      <p>Pour indiquer les éléments possibles sans notion d'ordre</p>
+      <pre class="brush: xml;"><![CDATA[
+         <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="nom" type="xsd:string"/>
+          <xsd:element name="prenom" type="xsd:string"/>
+        </xsd:choice>
+        ]]></pre>
+    </div>
+    <div>
+      <h2>Réutilisation des éléments définis</h2>
+      <p>On peut référencer une définition existante lors de la définition d'un élément</p>
+      <pre class="brush: xml;"><![CDATA[
+         <xsd:element name="personne">
+            ...
+         </xsd:complexType>
+         
+         <xsd:element name="personnes">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="personne"/>
+              </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+        ]]></pre>
+    </div>
+    <div>
+      <h2>Au final les schémas XML ça sert à quelque chose ?</h2>
+      <p>On a des schémas XML INSEE : <a href="http://xml.insee.fr/schema/">http://xml.insee.fr/schema/</a>.</p>
+      <p>C'est puissant pour la validation d'échanges applicatifs.</p>
+      <p>C'est élégant pour les contrôles dans les formulaires Web.</p>  
+    </div>
+    <div>
+      <h2 class="img">Sécurisation des échanges</h2>
+      <img src="images/archi-xml2.png" alt="Validation par xsd des données échangées."/>
+    </div>
+    <div>
+      <h2 class="img">Exemple web4g</h2>
+    </div>
+    <div>
+      <h2 class="img">Exercice 2</h2>
+    </div>
+    <div class="chapter" data-x="20000" data-y="0" data-scale="50">
+      <h1>XPath</h1>
+    </div>
+    <div data-y="2500">
+      <h2>Xpath</h2>
+      <p><span style="text-decoration: underline;">Quoi :</span> Langage localisation d'un élément XML.</p>
+      <p><span style="text-decoration: underline;">Pour quoi :</span> Tout ce qui manipule du XML.</p>
+      <p><span style="text-decoration: underline;">Comment :</span> Langage pseudo-fonctionnel avec une syntaxe très concise.</p>
+    </div>
+    <div>
+      <h2>Il s'agit de définir un chemin</h2>
+      <p>Les étapes de ce chemin sont séparés par des '/'</p>
+      <p>Exemple très simple : /ROOT/CC/DD va sélectionner l'élément DD</p>
+      <pre class="brush: xml;"><![CDATA[
+      <ROOT>
+        <AA>
+          <BB/>
+        </AA>
+        <CC>
+          <BB/>
+          <DD/>
+        </CC>
+      </ROOT>
+      ]]></pre>
+      <p>Dans cet exemple on va toujours chercher vers les enfants directs.</p>
+    </div>
+    <div>
+      <h2>On peut définir des axes de recherche différents.</h2>
+      <p/>
+      <pre class="brush: xml;"><![CDATA[
+      <ROOT>
+        <AA>
+          <BB/>
+        </AA>
+        <CC>
+          <BB>
+            <EE/>
+          </BB>
+          <DD/>
+        </CC>
+      </ROOT>
+      ]]></pre>
+      <ul>
+        <li>/descendant::EE va directement récupérer l'élément EE</li>
+        <li>EE/ancestor::CC va directement récupérer l'élément CC</li>
+        <li>AA/following::EE va directement récupérer l'élément EE</li>
+        <li>BB/preceding-sibling::AA ne va rien récupérer</li>
+      </ul>
+      <p>Voir lien : https://openclassrooms.com/fr/courses/1766341-structurez-vos-donnees-avec-xml/1769083-xpath-localiser-les-donnees#/id/r-1768856 pour la liste complète.</p>
+    </div>
+    <div>
+      <h2>On peut rechercher autre chose que le nom du noeud.</h2>
+      <ul>
+        <li>*  :  recherche tous les <b>éléments/balises</b></li>
+        <li>text()  :  recherche tous les <b>noeuds de type texte</b></li>
+        <li>node()  :  recherche <b>tous les types de noeuds</b> (les commentaires et les processing instructions aussi mais <b>PAS LES ATTRIBUTS</b>)</li>
+        <li>pour chercher les attributs, il faut prefixer par <b>@</b></li>
+      </ul>
+      <br/>
+      <ul>
+        <li>Ex: AA//* va chercher tous les éléments descendants de AA</li>
+        <li>Ex: AA/@* va chercher tous les attributs de AA</li>
+        <li>Ex: AA/@nom va chercher l'attribut nom de AA</li>
+      </ul>
+    </div>
+    <div>
+      <h2>On peut affiner la recherche avec des prédicats. A placer entre crochets.</h2>
+      <ul>
+        <li>Ex: AA//*[*] va chercher tous les éléments descendants de AA <b>qui ont eux même un élément enfant</b></li>
+        <li>Ex: AA//*[@nom] va chercher tous les éléments descendants de AA <b>qui ont un attribut nom</b></li>
+        <li>Ex: AA//*[* and @nom] va chercher tous les éléments descendants de AA <b>qui ont un attribut nom et un élément enfant</b></li>
+      </ul>
+    </div>
+    <div>
+      <p>Ex: ROOT//*[position()=1] va chercher tous les éléments descendants de ROOT <b>qui sont en première position parmi leurs frères</b></p>
+      <pre class="brush: xml;"><![CDATA[
+      <ROOT>
+        <AA>
+          <BB/>
+        </AA>
+        <CC>
+          <DD/>
+          <GG>
+            <EE/>
+            <FF/>
+          </GG>
+        </CC>
+      </ROOT>
+      ]]></pre>
+      <p>Ici il s'agit des éléments AA, BB, DD et EE.</p>
+      <p>Il existe d'autres fonctions Xpath comme position() pour écrire différentes conditions pour les prédicats.</p>
+    </div>
+    <div>
+      <ul>
+        <li>Plein d'exemples</li>
+        <li>Démonstration sous oXygen</li>
+        <li>Puis des exercices (3 et 4)</li>
+      </ul>
+    </div>
+    <div class="chapter" data-x="20000" data-y="5000" data-scale="50">
+      <h1>XSLT</h1>
+    </div>
+    <div class="chapter" data-x="20000" data-y="10000" data-scale="50">
+        <h1>BDD XML &amp; langage de requêtage Xquery</h1>
+    </div>
+    <div data-y="12500">
+      <h2>Bases de données XML : quels cas d'utilisation ?</h2>
+      <ul><li>Stocker des documents XML !</li></ul>
+    </div>
+    <div>
+      <h2>Concepts et principes</h2>
+      <ul>
+        <li>Base de données no SQL</li>
+        <li>Base de données orientée document</li>
+        <li>Unité de stockage le document XML</li>
+        <li>Concept de collection et sous-collection pour les documents</li>
+        <li>Pas d'adhérence au modèle de données des documents XML stockés</li>
+        <li>Triggers, procédures embarquées, indexes, contrôle d'accès...</li>
+      </ul>      
+    </div>
+    <div>
+      <h2>Etat de l'art</h2>      
+      <p style="text-decoration: underline;">Les "standards" Open Source :</p>
+      <ul>
+        <li>eXist : choisie par l'Insee</li>
+        <li>BaseX</li>        
+      </ul>
+      <p style="text-decoration: underline;">Le "standard" commercial :</p>
+      <ul>
+        <li>MarkLogic</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Interfaçage avec Java</h2>
+      <p>3 modes d'intefaçage "standards" :</p>
+      <ul>
+        <li>à la mode JNDI : bibliothèque XQJ (Xquery for Java)</li>
+        <li>à la mode XML : XMLDB, API standard de communication</li>
+        <li>à la mode services : webservices REST pour les opérations "CRUD"</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Qu'est-ce que ça ne fait pas bien ?</h2>
+      <p>Il n'y a pas de couche de persistance native :</p>
+      <ul><li><em>inadapté à de nombreuses transactions concurrentes.</em></li></ul>
+      <p>Non optimisée pour des jointures complexes : </p>
+      <ul>
+        <li><em>il faut des données adaptées à la représentation en arbre.</em></li>
+      </ul>     
+    </div>
+    <div>
+      <h2>XML Query Language</h2>
+      <p>Langage d'interrogation de données XML.</p>
+      <p>Version 3.1 sortie en recommandation en mars 2017.</p>
+      <p>Equivalent de SQL.</p>
+    </div>
+    <div>
+      <h2>Xquery : Quels cas d'utilisation ?</h2>
+      <ul>
+        <li>La consultation de données stockées en XML</li>
+        <li>La construction de services d'accès à des données XML</li>
+        <li>Applications Web (génération HTML, accès XML, servlet)</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Concepts et principes</h2>
+      <ul>
+        <li>C'est un langage fonctionnel.</li>
+        <li>Il existe de nombreuses API opensource.</li>      
+        <li>Ex : API type Jersey pour XQuery.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Bon XQuery c'est comme SQL alors ?</h2>
+      <p>Cela couvre un périmètre fonctionnel plus étendu.</p>
+      <p>C'est un langage de développement complet.</p>
+      <p>C'est la clé de voute des architectures avec bases XML.</p>
+      <p>Mais c'est aussi comme SQL, sans BDD XML ça perd de son intérêt.</p>
+    </div>
+    <div>
+      <h2>Accès aux données via des services Xquery.</h2>
+      <img src="images/archi-xml5.png" alt="Une chouche de services Xquery permet l'accès à la base XML."/>
+    </div>
+    <div class="chapter" data-x="20000" data-y="15000" data-scale="50">
+      <h1>Xforms, Xproc, et autres trucs plein de X</h1>
+    </div>
+    <div data-y="17500">
+      <h2>XML Forms</h2>
+      <p>Langage de description de formulaire.</p>
+      <p>Version 1.1 sortie en recommandation en 2009</p>
+      <p>Version 2.0 en Draft, last edit 2013</p>
+    </div>
+    <div>
+      <h2>Xforms : Quels cas d'utilisation ?</h2>      
+      <ul>
+      <li>Génération de questionnaires Web</li>
+      <li>Formulaires Web pour accéder des données XML</li>
+      <li>Interfaces Web dynamiques sans Javascript</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Xforms : Concepts et principes</h2>
+      <ul>
+        <li>Modèle MVC</li>
+      <li>Modèle déclaratif (objet 'action')</li>
+      <li>Peu d'implémentation native dans les browsers</li>
+      <li>Nécessite un "middleware" : Orbeon à l'Insee pour Coltrane</li>
+      </ul>
+    </div>
+    <div>
+      <h2> Xforms ?? Jamais entendu parler...</h2>
+      <p>Son développement est "perturbé" par l'échec de XHTML 2.0.</p>
+      <p>Son développement est compliqué face à "l'omnipuissance" de javascript sur le web.</p>
+      <p>L'absence d'implémentation native dans les browsers est un sérieux frein.</p>
+      <p>Cela reste une technologie puissante mais nécessite l'architecture adéquate.</p>
+      <p>On migre doucement mais sûrement de cette couche XForms/Orbeon vers une solution React.</p>
+    </div>
+    <div>
+      <h2>Interface applicative web en Xforms.</h2>
+      <img src="images/archi-xml6.png" alt="L'interface web de l'application est en Xforms."/>
+    </div>
+    <div>
+      <h2>Ant</h2>
+      <p><span style="text-decoration: underline;">Quoi :</span> Langage de script avec une syntaxe XML.</p>
+      <p><span style="text-decoration: underline;">Pour quoi :</span> Batch, séquence d'opérations.</p>
+      <p><span style="text-decoration: underline;">Comment :</span> Des "target" et un scénario.</p>
+      <p><span style="text-decoration: underline;">En bref :</span> Langage de batch utilisé par Coltrane.</p>
+    </div>
+    <div>
+      <h2>Xproc</h2>
+      <p><span style="text-decoration: underline;">Quoi :</span> Langage de pipeline XML.</p>
+      <p><span style="text-decoration: underline;">Pour quoi :</span> Batch ou pipeline dans une architecture XML.</p>
+      <p><span style="text-decoration: underline;">Comment :</span> Des tuyaux que l'on branche les uns aux autres.</p>
+    </div>
+    <div>
+      <h2>XML Pipeline</h2>
+      <p><span style="text-decoration: underline;">Quoi :</span> Autre langage de pipeline XML.</p>
+      <p><span style="text-decoration: underline;">Pour quoi :</span> Batch ou pipeline utilisé au sein d'Orbeon.</p>
+      <p><span style="text-decoration: underline;">Comment :</span> Des tuyaux que l'on branche les uns aux autres.</p>
+      <p><span style="text-decoration: underline;">En bref :</span> Utilisé dans Coltrane pour le moment.</p>
+    </div>
+    <div>
+      <h2>Architecture full XML</h2>
+      <img src="images/archi-xml7.png" alt="Couche de batch en XML"/>      
+    </div>    
+    <div class="chapter" data-x="20000" data-y="20000" data-scale="50">
+      <h1>Liens avec Java et Json.</h1>
+    </div>
+    <div data-y="22500">
+      <h2>JAXB</h2>
+      <p>Un traducteur</p>
+    </div>
+    <div>
+      <h2>Java Architecture for XML Binding</h2>
+      <p>Librairie Java recommandée</p>
+      <p>Génération de classes à partir d'un schéma</p>
+      <p>Utilisation d'annotations</p>
+    </div>
+    <div>
+      <h2>JAXB : quels cas d'utilisation ?</h2>
+      <ul>
+        <li>Génération de fichiers XML</li>
+        <li>Lecture en Java de fichiers XML</li>
+      </ul>
+    </div>
+    <div>
+      <h2>JAXB : Concepts et principes</h2>
+      <ul>
+        <li>Définition d'un binding en s'appuyant sur un schéma ou des annotations.</li>
+        <li>Utilisation du code généré et annoté pour lire/écrire du XML</li>
+        <li>Marshaller : Ecrire du XML (~serialiser)</li>
+        <li>Unmarshaller : Créer des objets Java</li>        
+      </ul>
+    </div>
+    <div>
+      <h2>JAXB : Un helloworld "pompé"</h2>
+      <p>On veut générer le fichier ci-dessous :</p>
+      <pre class="brush: xml;"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Greetings>
+  <Greeting language="fr">
+    <Text>Bonjour, madame</Text>
+  </Greeting>
+  <Greeting language="en">
+    <Text>Hey, you</Text>
+  </Greeting>
+</Greetings>
+        ]]></pre>
+    </div>
+    <div>
+      <h2>Définition du binding</h2>
+      <p>On définit le schéma associé au fichier souhaité</p>
+      <pre class="brush: xml;"><![CDATA[
+      <?xml version="1.0" encoding="UTF-8"?>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+        jxb:version="2.0">
+        
+        <xsd:element name="Greetings" type="GreetingListType"/>
+        
+        <xsd:complexType name="GreetingListType">
+          <xsd:sequence>
+            <xsd:element name="Greeting" type="GreetingType"
+              maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+        
+        <xsd:complexType name="GreetingType">
+          <xsd:sequence>
+            <xsd:element name="Text" type="xsd:string"/>
+          </xsd:sequence>
+          <xsd:attribute name="language" type="xsd:language"/>
+        </xsd:complexType>
+        
+      </xsd:schema>
+      ]]></pre>
+    </div>
+    <div>
+      <h2>Génération du code Java</h2>
+      <p>Instruction de génération :</p>
+      <pre class="brush:java;"><![CDATA[
+       xjc -p hello hello.xsd ]]></pre>
+      <p>Extrait de code généré :</p>
+      <pre class="brush:java;"><![CDATA[
+import java.util.*;
+import javax.xml.bind.*;
+import hello.*;
+
+public class Hello {
+
+    private ObjectFactory of;
+    private GreetingListType grList;
+
+    public Hello(){
+        of = new ObjectFactory();
+        grList = of.createGreetingListType();
+    }
+
+    public void make( String t, String l ){
+        GreetingType g = of.createGreetingType();
+        g.setText( t );
+        g.setLanguage( l );
+        grList.getGreeting().add( g );
+    }
+
+    public void marshal() {
+        try {
+            JAXBElement<GreetingListType> gl =
+                of.createGreetings( grList );
+            JAXBContext jc = JAXBContext.newInstance( "hello" );
+            Marshaller m = jc.createMarshaller();
+            m.marshal( gl, System.out );
+        } catch( JAXBException jbe ){
+            // ...
+        }
+    }
+} ]]></pre>
+    </div>
+    <div>
+      <h2>Création du fichier XML</h2>
+      <p>"Bonjour, Madame"</p>
+      <pre class="brush: xml;"><![CDATA[
+      Hello h = new Hello();
+      h.make( "Bonjour, madame", "fr" ); 
+      h.make( "Hey, you", "en" ); 
+      h.marshal();
+      ]]></pre>
+    </div>
+    <div>
+      <h2>JSON</h2>
+      <p>Un concurrent</p>
+    </div>
+    <div>
+      <h2>Javascript Object Notation</h2>                  
+        <p>Langage de description de données structurées.</p>
+        <p>Dernière rfc, la 8259, date de 2017.</p>
+        <p>S'inspire de pratiques javascript.</p>      
+    </div>
+    <div>
+      <h2>JSON, quels usages ?</h2>
+      <ul>
+      <li>Echanges de données informatisées</li>
+      <li>Ajax</li>
+      </ul>
+    </div>
+    <div>
+      <h2>JSON, rapidement ça ressemble à quoi ?</h2>
+      <ul>
+      <li>Des types de valeur : object, array, string, number, boolean, null</li>
+      <li>Des objets, notés {...,...}, qui contiennent des paires clé:valeur sans ordre</li>
+      <li>Les clés sont des string, les valeurs le type qu'on veut</li>
+      <li>Des tableaux, notés [....,....], qui contiennent des valeurs ordonnées</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Un exemple</h2>      
+      <pre class="brush: xml;"><![CDATA[{
+  "uneclé": "unevaleur",
+  "uneautreclé": "uneautrevaleur",
+  "unObjet": {
+    "couleur": "bleu",
+    "taille": "petite",
+    "poids": "leger",    
+  },
+  "unTableau": [
+    {
+      "Date": "12/12/12",
+      "Pays": "Galapagos"
+    },
+    {
+      "Date": "25/05/13",
+      "Pays": "Guatemala"
+    }
+  ],  
+}]]></pre>
+    </div>
+    <div>
+      <h2>Sont-ils vraiment concurrents ?</h2>
+      <ul>
+        <li>JSON est un format de données, XML est un langage autour duquel gravite plusieurs modules qu'on vient de voir.</li>
+        <li>XML est sans doute préférable pour l'échange de données entre application.</li>
+        <li>JSON a gagné la "bataille du web" pour les appels AJAX et au vu du développement des bibliothèques et framework javascript.</li>
+      </ul>
+    </div>
+    <div class="intro" style="color:white; padding:80px;background-color:black;" data-x="-60000" data-y="105000"
+      data-scale="50" data-out-of-sequence="true">
+      <div>        
+        <h1 style="color:white;">XML galaxy</h1>
+      </div>
+      <h2 style="color:white;margin-top:2em;margin-left:2em;text-aling:center;">This is the end .</h2>      
+    </div>
+  </body>
+</html>

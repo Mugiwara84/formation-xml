@@ -1,0 +1,3 @@
+XPATH :
+https://openclassrooms.com/fr/courses/1766341-structurez-vos-donnees-avec-xml/1769083-xpath-localiser-les-donnees#/id/r-1768856
+https://erwy.developpez.com/tutoriels/xml/xpath-fonctionnements-predicats/
